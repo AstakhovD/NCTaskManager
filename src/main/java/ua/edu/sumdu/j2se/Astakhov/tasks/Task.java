@@ -46,7 +46,6 @@ public class Task {
         repeated = true;
     }
 
-    
     /***
      * Method getTitle returns the title of this object.
      *
