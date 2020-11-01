@@ -11,7 +11,7 @@ public class ArrayTaskList {
     private Task[] list = new Task[0];
 
     /***
-     * Method add
+     * Method add - adds the specified task to the list.
      *
      * @param task of type Task
      */
@@ -26,7 +26,8 @@ public class ArrayTaskList {
     }
 
     /***
-     *
+     * Method remove - deleted Task from list and return true if this Task was be in the list.
+     * If in the list been more than one like this Task - delete any Task.
      *
      * @param task of type Task
      * @return false
@@ -50,7 +51,7 @@ public class ArrayTaskList {
     }
 
     /***
-     * The method returns the size of the list
+     * The method returns the size of the list.
      *
      * @return the size of the list
      */
@@ -60,7 +61,7 @@ public class ArrayTaskList {
     }
 
     /***
-     * Method getTask returns the index on array
+     * Method getTask - returns the index on array..
      *
      * @param index of type int
      * @return the index on array
@@ -71,10 +72,11 @@ public class ArrayTaskList {
     }
 
     /***
+     * Method ArrayTaskList incoming - returns a subset of tasks that were scheduled to run at least once after "from" and no later than "to".
      *
      * @param from of type int
      * @param to of type int
-     * @return
+     * @return the arrayTaskList
      */
 
     public ArrayTaskList incoming (int from, int to){
