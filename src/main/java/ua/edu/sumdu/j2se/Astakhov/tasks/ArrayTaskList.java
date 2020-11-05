@@ -16,7 +16,7 @@ public class ArrayTaskList {
      * @param task of type Task
      */
 
-    public void  add (Task task){
+    public void add (Task task){
             Task[] tasks = list;
             list = new Task[tasks.length + 1];
             for(int i = 0; i < tasks.length; i++) {
