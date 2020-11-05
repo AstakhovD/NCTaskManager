@@ -36,7 +36,7 @@ public class ArrayTaskList {
     public boolean remove(Task task) {
         for (int i = 0; i < list.length; i++) {
             if (list[i] == task) {
-                Task[] tasks = list;
+                Task [] tasks = list;
                 list = new Task[tasks.length - 1];
                 for (int j = 0; j < i; j++) {
                     list[j] = tasks[j];
@@ -61,7 +61,7 @@ public class ArrayTaskList {
     }
 
     /***
-     * Method getTask - returns the index on array..
+     * Method getTask - returns the index on array.
      *
      * @param index of type int
      * @return the index on array
@@ -82,7 +82,7 @@ public class ArrayTaskList {
     public ArrayTaskList incoming (int from, int to){
         ArrayTaskList arrayTaskList = new ArrayTaskList();
         for (int i = 0; i < list.length; i++) {
-            if (list[i].nextTimeAfter(from) != -1 && list[i].getEndTime() <= to) {
+            if (list[i].nextTimeAfter(from) != -1 & list[i].getEndTime() <= to) {
                 if (list[i].isActive()) {
                     arrayTaskList.add(list[i]);
                 }
