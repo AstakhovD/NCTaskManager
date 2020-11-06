@@ -82,7 +82,7 @@ public class ArrayTaskList {
     public ArrayTaskList incoming (int from, int to){
         ArrayTaskList arrayTaskList = new ArrayTaskList();
         for (int i = 0; i < list.length; i++) {
-            if (list[i].nextTimeAfter(from) != -1 & list[i].getEndTime() <= to) {
+            if (list[i].nextTimeAfter(from) != -1 && list[i].getEndTime() <= to) {
                 if (list[i].isActive()) {
                     arrayTaskList.add(list[i]);
                 }
