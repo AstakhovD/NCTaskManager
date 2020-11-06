@@ -43,7 +43,7 @@ public class ArrayTaskList {
 
     public boolean remove(Task task) {
         for (int i = 0; i < size; i++) {
-            if (list[i].equals(task)) { //compare each task from the array with the set task
+            if (list[i] == task) {
                 for(int k = i; k < size - 1; k++) { //all tasks, that follows after found task, shift by one cell left
                     list[i] = list[k + 1];
                 }
