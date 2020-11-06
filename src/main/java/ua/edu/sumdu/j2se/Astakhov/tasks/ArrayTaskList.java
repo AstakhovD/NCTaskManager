@@ -8,7 +8,11 @@ package ua.edu.sumdu.j2se.Astakhov.tasks;
 
 public class ArrayTaskList {
 
-    private Task[] list = new Task[0];
+    private Task[] list;
+
+    public ArrayTaskList() {
+        list = new Task[10];
+    }
 
     /***
      * Method add - adds the specified task to the list.
@@ -17,7 +21,7 @@ public class ArrayTaskList {
      */
 
     public void add (Task task){
-            Task[] tasks = list;
+         Task[] tasks = list;
             list = new Task[tasks.length + 1];
             for(int i = 0; i < tasks.length; i++) {
                 list[i] = tasks[i];
@@ -83,9 +87,7 @@ public class ArrayTaskList {
         ArrayTaskList arrayTaskList = new ArrayTaskList();
         for (int i = 0; i < list.length; i++) {
             if (list[i].nextTimeAfter(from) != -1 && list[i].getEndTime() <= to) {
-                if (list[i].isActive()) {
-                    arrayTaskList.add(list[i]);
-                }
+                arrayTaskList.add(list[i]);
             }
         }
         return arrayTaskList;
