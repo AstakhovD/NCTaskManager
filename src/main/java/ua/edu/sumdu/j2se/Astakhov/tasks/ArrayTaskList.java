@@ -1,5 +1,6 @@
 package ua.edu.sumdu.j2se.Astakhov.tasks;
 
+import java.util.Arrays;
 /***
  * Class ArrayTaskList
  *
@@ -8,10 +9,14 @@ package ua.edu.sumdu.j2se.Astakhov.tasks;
 
 public class ArrayTaskList {
 
+    private final int DEFAULT_CAPACITY = 10;
     private Task[] list;
+    private int size;
 
-    public ArrayTaskList() {
-        list = new Task[10];
+
+   public ArrayTaskList() {
+        list = new Task[DEFAULT_CAPACITY];
+        size = 0;
     }
 
     /***
@@ -21,12 +26,11 @@ public class ArrayTaskList {
      */
 
     public void add (Task task){
-         Task[] tasks = list;
-            list = new Task[tasks.length + 1];
-            for(int i = 0; i < tasks.length; i++) {
-                list[i] = tasks[i];
-            }
-        list[list.length - 1] = task;
+        if(size == list.length) {
+            list = Arrays.copyOf(list, (int)(list.length * 1.5));
+        }
+        list[size] = task;
+        size++;
     }
 
     /***
@@ -38,16 +42,13 @@ public class ArrayTaskList {
      */
 
     public boolean remove(Task task) {
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] == task) {
-                Task [] tasks = list;
-                list = new Task[tasks.length - 1];
-                for (int j = 0; j < i; j++) {
-                    list[j] = tasks[j];
+        for (int i = 0; i < size; i++) {
+            if (list[i].equals(task)) { //compare each task from the array with the set task
+                for(int k = i; k < size - 1; k++) { //all tasks, that follows after found task, shift by one cell left
+                    list[i] = list[k + 1];
                 }
-                for (int j = i + 1; j < tasks.length; j++) {
-                    list[j - 1] = tasks[j];
-                }
+                list[size] = null; //reset the last task of the array
+                size--;
                 return true;
             }
         }
@@ -61,7 +62,7 @@ public class ArrayTaskList {
      */
 
     public int size() {
-        return list.length;
+        return size;
     }
 
     /***
@@ -73,6 +74,7 @@ public class ArrayTaskList {
 
     public Task getTask(int index){
         return list[index];
+
     }
 
     /***
@@ -85,7 +87,7 @@ public class ArrayTaskList {
 
     public ArrayTaskList incoming (int from, int to){
         ArrayTaskList arrayTaskList = new ArrayTaskList();
-        for (int i = 0; i < list.length; i++) {
+        for (int i = 0; i < size; i++) {
             if (list[i].nextTimeAfter(from) != -1 && list[i].getEndTime() <= to) {
                 arrayTaskList.add(list[i]);
             }
