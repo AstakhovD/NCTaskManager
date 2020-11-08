@@ -44,10 +44,10 @@ public class ArrayTaskList {
     public boolean remove(Task task) {
         for (int i = 0; i < size; i++) {
             if (list[i] == task) {
-                for(int k = i; k < size - 1; k++) { //all tasks, that follows after found task, shift by one cell left
+                for(int k = i; k < size - 1; k++) {
                     list[i] = list[k + 1];
                 }
-                list[size] = null; //reset the last task of the array
+                list[size] = null;
                 size--;
                 return true;
             }
