@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author Астахов Дмитрій
  */
 
-public class LinkedTaskList {
+public class LinkedTaskList extends AbstractTaskList {
 
     private final int DEFAULT_CAPACITY = 10;
     private Task[] list;
@@ -79,23 +79,5 @@ public class LinkedTaskList {
         }
 
         return list[index];
-    }
-
-    /***
-     * Method LinkedTaskList incoming - returns a subset of tasks that were scheduled to run at least once after "from" and no later than "to".
-     *
-     * @param from of type int
-     * @param to of type int
-     * @return the linkedTaskList
-     */
-
-    public LinkedTaskList incoming (int from, int to){
-        LinkedTaskList linkedTaskList = new LinkedTaskList();
-        for (int i = 0; i < size; i++) {
-            if (list[i].nextTimeAfter(from) != -1 && list[i].getEndTime() <= to) {
-                linkedTaskList.add(list[i]);
-            }
-        }
-        return linkedTaskList;
     }
 }

@@ -7,7 +7,7 @@ import java.util.Arrays;
  * @author Астахов Дмитрій
  */
 
-public class ArrayTaskList {
+public class ArrayTaskList extends AbstractTaskList {
 
     private final int DEFAULT_CAPACITY = 10;
     private Task[] list;
@@ -78,23 +78,5 @@ public class ArrayTaskList {
         }
 
         return list[index];
-    }
-
-    /***
-     * Method ArrayTaskList incoming - returns a subset of tasks that were scheduled to run at least once after "from" and no later than "to".
-     *
-     * @param from of type int
-     * @param to of type int
-     * @return the arrayTaskList
-     */
-
-    public ArrayTaskList incoming (int from, int to){
-        ArrayTaskList arrayTaskList = new ArrayTaskList();
-        for (int i = 0; i < size; i++) {
-            if (list[i].nextTimeAfter(from) != -1 && list[i].getEndTime() <= to) {
-                arrayTaskList.add(list[i]);
-            }
-        }
-        return arrayTaskList;
     }
 }
