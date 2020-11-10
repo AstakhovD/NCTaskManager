@@ -1,7 +1,5 @@
 package ua.edu.sumdu.j2se.Astakhov.tasks;
 
-import java.util.Arrays;
-
 /***
  * Class ArrayTaskList
  *
@@ -10,91 +8,91 @@ import java.util.Arrays;
 
 public class LinkedTaskList {
 
-    private final int DEFAULT_CAPACITY = 10;
-    private Task[] list;
+    private Node head;
     private int size;
 
+    private class Node {
+        public Task task;
+        public Node next;
 
-    public LinkedTaskList() {
-        list = new Task[DEFAULT_CAPACITY];
-        size = 0;
+        public Node(Task task) {
+            this.task = task;
+            next = null;
+        }
     }
 
-    /***
-     * Method add - adds the specified task to the list.
-     *
-     * @param task of type Task
-     */
+    public void add(Task task) {
+        Node node = new Node(task);
 
-    public void add (Task task){
-        if(size == list.length) {
-            list = Arrays.copyOf(list, (int)(list.length * 1.5));
+        if(head == null){
+            head = node;
         }
-        list[size] = task;
+        else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = node;
+        }
         size++;
     }
 
-    /***
-     * Method remove - deleted Task from list and return true if this Task was be in the list.
-     * If in the list been more than one like this Task - delete any Task.
-     *
-     * @param task of type Task
-     * @return false
-     */
+    public int size(){
+        return size;
+    }
 
     public boolean remove(Task task) {
-        for (int i = 0; i < size; i++) {
-            if (list[i] == task) {
-                for(int k = i; k < size - 1; k++) {
-                    list[i] = list[k + 1];
+        if(head != null) {
+            Node current = head;
+            Node previous = head;
+            for (int i = 0; i < size; i++) {
+                if (task == (getTask(i))) {
+                    if (previous == current && head.next != null) {
+                        head = current.next;
+                    }else {
+                        previous.next = current.next;
+                    }
+                            size--;
+
+                    int index = 0;
+                    current = head;
+
+                    while (current != null) {
+                        current = current.next;
+                        index++;
+                    }
+                    return true;
                 }
-                list[size] = null;
-                size--;
-                return true;
+                previous = current;
+                current = current.next;
             }
+
         }
         return false;
     }
 
-    /***
-     * The method returns the size of the list.
-     *
-     * @return the size of the list
-     */
-
-    public int size() {
-        return size;
-    }
-
-    /***
-     * Method getTask - returns the index on array.
-     *
-     * @param index of type int
-     * @return the index on array
-     */
-
-    public Task getTask(int index){
-        if(list.length < index) {
-            throw new IndexOutOfBoundsException("Index greater than the length of the array");
+    public Task getTask(int index) {
+        if(index > size) {
+            throw new IndexOutOfBoundsException();
         }
-
-        return list[index];
+        int i = 0;
+        Node current = head;
+        while(i < index) {
+            current = current.next;
+            i++;
+        }
+        return current.task;
     }
 
-    /***
-     * Method LinkedTaskList incoming - returns a subset of tasks that were scheduled to run at least once after "from" and no later than "to".
-     *
-     * @param from of type int
-     * @param to of type int
-     * @return the linkedTaskList
-     */
-
-    public LinkedTaskList incoming (int from, int to){
+    public LinkedTaskList incoming(int from, int to) {
         LinkedTaskList linkedTaskList = new LinkedTaskList();
-        for (int i = 0; i < size; i++) {
-            if (list[i].nextTimeAfter(from) != -1 && list[i].getEndTime() <= to) {
-                linkedTaskList.add(list[i]);
+        Node current = head;
+
+        while(current.next != null) {
+            if (current.task.nextTimeAfter(from) != -1 && current.task.getEndTime() <= to) {
+                linkedTaskList.add(current.task);
             }
+            current = current.next;
         }
         return linkedTaskList;
     }
