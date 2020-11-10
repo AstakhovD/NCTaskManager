@@ -1,21 +1,20 @@
-package ua.edu.sumdu.j2se.Astakhov.tasks;
+package ua.edu.sumdu.j2se.astakhov.tasks;
 
 import java.util.Arrays;
-
 /***
  * Class ArrayTaskList
  *
  * @author Астахов Дмитрій
  */
 
-public class LinkedTaskList extends AbstractTaskList {
+public class ArrayTaskList extends AbstractTaskList{
 
     private final int DEFAULT_CAPACITY = 10;
     private Task[] list;
     private int size;
 
 
-    public LinkedTaskList() {
+    public ArrayTaskList() {
         list = new Task[DEFAULT_CAPACITY];
         size = 0;
     }
@@ -79,5 +78,23 @@ public class LinkedTaskList extends AbstractTaskList {
         }
 
         return list[index];
+    }
+
+    /***
+     * Method ArrayTaskList incoming - returns a subset of tasks that were scheduled to run at least once after "from" and no later than "to".
+     *
+     * @param from of type int
+     * @param to of type int
+     * @return the arrayTaskList
+     */
+
+    public ArrayTaskList incoming (int from, int to){
+        ArrayTaskList arrayTaskList = new ArrayTaskList();
+        for (int i = 0; i < size; i++) {
+            if (list[i].nextTimeAfter(from) != -1 && list[i].getEndTime() <= to) {
+                arrayTaskList.add(list[i]);
+            }
+        }
+        return arrayTaskList;
     }
 }
