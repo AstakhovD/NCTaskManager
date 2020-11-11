@@ -53,7 +53,6 @@ public class LinkedTaskList {
                         previous.next = current.next;
                     }
                             size--;
-
                     int index = 0;
                     current = head;
 
