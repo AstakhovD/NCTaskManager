@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.Astakhov.tasks;
+package ua.edu.sumdu.j2se.astakhov.tasks;
 
 /***
  * Class ArrayTaskList
@@ -73,7 +73,7 @@ public class LinkedTaskList {
 
     public Task getTask(int index) {
         if(index > size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Index greater than the size of the array");
         }
         int i = 0;
         Node current = head;
