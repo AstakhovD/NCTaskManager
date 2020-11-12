@@ -12,8 +12,8 @@ public class LinkedTaskList {
     private int size;
 
     private class Node {
-        public Task task;
-        public Node next;
+        private Task task;
+        private Node next;
 
         public Node(Task task) {
             this.task = task;
