@@ -13,7 +13,6 @@ public class ArrayTaskList extends AbstractTaskList{
     private Task[] list;
     private int size;
 
-
     public ArrayTaskList() {
         list = new Task[DEFAULT_CAPACITY];
         size = 0;

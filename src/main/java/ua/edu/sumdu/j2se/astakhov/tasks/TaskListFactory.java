@@ -8,6 +8,7 @@ public class TaskListFactory {
         if (type == (ListTypes.types.LINKED)) {
             return new LinkedTaskList();
         }
+
         return null;
     }
 }

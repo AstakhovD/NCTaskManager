@@ -11,5 +11,6 @@ public abstract class AbstractTaskList {
     public abstract Task getTask(int index);
 
     public abstract AbstractTaskList incoming(int from, int to);
+
 }
 

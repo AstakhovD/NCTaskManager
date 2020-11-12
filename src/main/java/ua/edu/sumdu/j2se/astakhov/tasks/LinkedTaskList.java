@@ -52,7 +52,7 @@ public class LinkedTaskList extends AbstractTaskList {
                     }else {
                         previous.next = current.next;
                     }
-                            size--;
+                    size--;
 
                     int index = 0;
                     current = head;
