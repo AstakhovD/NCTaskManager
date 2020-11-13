@@ -77,6 +77,7 @@ public class ArrayTaskList extends AbstractTaskList{
         }
 
         return list[index];
+
     }
 
     /***

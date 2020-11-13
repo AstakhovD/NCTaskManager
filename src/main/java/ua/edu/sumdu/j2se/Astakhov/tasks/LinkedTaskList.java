@@ -12,8 +12,8 @@ public class LinkedTaskList extends AbstractTaskList {
     private int size;
 
     private class Node {
-        public Task task;
-        public Node next;
+        private Task task;
+        private Node next;
 
         public Node(Task task) {
             this.task = task;
@@ -59,7 +59,8 @@ public class LinkedTaskList extends AbstractTaskList {
 
                     while (current != null) {
                         current = current.next;
-                        index++;
+                      index--;
+
                     }
                     return true;
                 }
@@ -73,7 +74,7 @@ public class LinkedTaskList extends AbstractTaskList {
 
     public Task getTask(int index) {
         if(index > size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Index greater than the size of the array");
         }
         int i = 0;
         Node current = head;
