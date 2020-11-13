@@ -13,8 +13,8 @@ public class ArrayTaskList {
     private Task[] list;
     private int size;
 
+   public ArrayTaskList() {
 
-    public ArrayTaskList() {
         list = new Task[DEFAULT_CAPACITY];
         size = 0;
     }
@@ -78,6 +78,7 @@ public class ArrayTaskList {
         }
 
         return list[index];
+
     }
 
     /***
