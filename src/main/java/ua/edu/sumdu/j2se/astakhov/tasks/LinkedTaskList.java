@@ -58,7 +58,7 @@ public class LinkedTaskList {
 
                     while (current != null) {
                         current = current.next;
-                        index++;
+                        index--;
                     }
                     return true;
                 }
