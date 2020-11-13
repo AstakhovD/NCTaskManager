@@ -6,7 +6,7 @@ package ua.edu.sumdu.j2se.Astakhov.tasks;
  * @author Астахов Дмитрій
  */
 
-public class LinkedTaskList {
+public class LinkedTaskList extends AbstractTaskList {
 
     private Node head;
     private int size;
@@ -52,13 +52,15 @@ public class LinkedTaskList {
                     }else {
                         previous.next = current.next;
                     }
-                            size--;
+                    size--;
+
                     int index = 0;
                     current = head;
 
                     while (current != null) {
                         current = current.next;
-                        index--;
+                      index--;
+
                     }
                     return true;
                 }

@@ -7,14 +7,13 @@ import java.util.Arrays;
  * @author Астахов Дмитрій
  */
 
-public class ArrayTaskList {
+public class ArrayTaskList extends AbstractTaskList{
 
     private final int DEFAULT_CAPACITY = 10;
     private Task[] list;
     private int size;
 
-   public ArrayTaskList() {
-
+    public ArrayTaskList() {
         list = new Task[DEFAULT_CAPACITY];
         size = 0;
     }
