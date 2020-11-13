@@ -27,6 +27,9 @@ public class Task {
     public Task(String title, int time) {
         this.title = title;
         this.time = time;
+        if(time < 0) {
+            throw new IllegalArgumentException("Time can not be a 0");
+        }
     }
 
     /***
@@ -44,6 +47,9 @@ public class Task {
         this.end = end;
         this.interval = interval;
         repeated = true;
+        if(start < 0 || end < 0) {
+            throw new IllegalArgumentException("Time can not be a 0");
+        }
     }
 
     /***

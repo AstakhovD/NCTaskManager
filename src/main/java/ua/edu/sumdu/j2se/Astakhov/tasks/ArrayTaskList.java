@@ -13,8 +13,8 @@ public class ArrayTaskList {
     private Task[] list;
     private int size;
 
-
    public ArrayTaskList() {
+
         list = new Task[DEFAULT_CAPACITY];
         size = 0;
     }
@@ -73,6 +73,10 @@ public class ArrayTaskList {
      */
 
     public Task getTask(int index){
+        if(list.length < index) {
+            throw new IndexOutOfBoundsException("Index greater than the length of the array");
+        }
+
         return list[index];
 
     }
