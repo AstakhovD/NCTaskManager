@@ -1,13 +1,17 @@
 package ua.edu.sumdu.j2se.astakhov.tasks;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+
 /***
  * Class ArrayTaskList
  *
  * @author Астахов Дмитрій
  */
 
-public class ArrayTaskList extends AbstractTaskList{
+public class ArrayTaskList extends AbstractTaskList {
 
     private final int DEFAULT_CAPACITY = 10;
     private Task[] list;
@@ -15,7 +19,6 @@ public class ArrayTaskList extends AbstractTaskList{
 
     public ArrayTaskList() {
         list = new Task[DEFAULT_CAPACITY];
-        size = 0;
     }
 
     /***
@@ -25,33 +28,38 @@ public class ArrayTaskList extends AbstractTaskList{
      */
 
     public void add (Task task){
+        if (task == null) {
+            throw new NullPointerException();
+        }
         if(size == list.length) {
             list = Arrays.copyOf(list, (int)(list.length * 1.5));
         }
-        list[size] = task;
-        size++;
+        list[size++] = task;
     }
 
     /***
-     * Method remove - deleted Task from list and return true if this Task was be in the list.
-     * If in the list been more than one like this Task - delete any Task.
-     *
+     *  Method remove - deleted Task from list and return true if this Task was be in the list.
+     *  If in the list been more than one like this Task - delete any Task.
      * @param task of type Task
-     * @return false
+     * @return removed
      */
 
     public boolean remove(Task task) {
-        for (int i = 0; i < size; i++) {
-            if (list[i] == task) {
-                for(int k = i; k < size - 1; k++) {
-                    list[i] = list[k + 1];
-                }
-                list[size] = null;
-                size--;
-                return true;
+        boolean removeTask = false;
+        for (int i = 0, k = i; k < size; i++, k++) {
+            if (!removeTask && list[i].equals(task)) {
+                k++;
+                removeTask = true;
+            }
+            if (k < size) {
+                list[i] = list[k];
             }
         }
-        return false;
+        if (removeTask) {
+            list[size - 1] = null;
+            size--;
+        }
+        return removeTask;
     }
 
     /***
@@ -75,9 +83,7 @@ public class ArrayTaskList extends AbstractTaskList{
         if(list.length < index) {
             throw new IndexOutOfBoundsException("Index greater than the length of the array");
         }
-
         return list[index];
-
     }
 
     /***
@@ -96,5 +102,73 @@ public class ArrayTaskList extends AbstractTaskList{
             }
         }
         return arrayTaskList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ArrayTaskList arrayTaskList = (ArrayTaskList) o;
+
+        if (size != arrayTaskList.size) return false;
+        return Arrays.equals(list, arrayTaskList.list);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(list);
+    }
+
+    public ArrayTaskList clone() {
+        try {
+            ArrayTaskList arrayClone = (ArrayTaskList) super.clone();
+            arrayClone.list = Arrays.copyOf(list, list.length);
+            return arrayClone;
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError(e);
+        }
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return new Iterator<Task>() {
+            private int current = 0;
+
+            @Override
+            public boolean hasNext() {
+                return current < size;
+            }
+
+            @Override
+            public Task next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return list[current++];
+            }
+
+            @Override
+            public void remove() throws IllegalStateException {
+                if(current <= 0) {
+                    throw new IllegalStateException();
+                }
+                    ArrayTaskList arrayRemove = new ArrayTaskList();
+                    arrayRemove.list = list;
+                    arrayRemove.size = size;
+                    Task tasks = list[--current];
+                    arrayRemove.remove(tasks);
+                    size--;
+                }
+        };
+    }
+
+    @Override
+    public String toString() {
+        return "ArrayTaskList{" +
+                "DEFAULT_CAPACITY=" + DEFAULT_CAPACITY +
+                ", list=" + Arrays.toString(list) +
+                ", size=" + size +
+                '}';
     }
 }

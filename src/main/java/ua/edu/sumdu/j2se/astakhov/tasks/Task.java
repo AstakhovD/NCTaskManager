@@ -1,5 +1,7 @@
 package ua.edu.sumdu.j2se.astakhov.tasks;
 
+import java.util.Objects;
+
 /***
  * Class Task
  *
@@ -7,7 +9,7 @@ package ua.edu.sumdu.j2se.astakhov.tasks;
  *
  */
 
-public class Task {
+public class Task implements Cloneable {
 
     private String title;
     private int time;
@@ -222,5 +224,48 @@ public class Task {
             return -1;
         }
         return current;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        if (time != task.time) return false;
+        if (start != task.start) return false;
+        if (end != task.end) return false;
+        if (interval != task.interval) return false;
+        if (active != task.active) return false;
+        if (repeated != task.repeated) return false;
+        return Objects.equals(title, task.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle(), isActive(), getTime(), getRepeatInterval(), isRepeated(), getStartTime(), getEndTime());
+    }
+
+    public Task clone() {
+        try {
+            Task task = (Task) super.clone();
+            return task;
+        } catch (CloneNotSupportedException e ) {
+            return null;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", time=" + time +
+                ", start=" + start +
+                ", end=" + end +
+                ", interval=" + interval +
+                ", active=" + active +
+                ", repeated=" + repeated +
+                '}';
     }
 }
