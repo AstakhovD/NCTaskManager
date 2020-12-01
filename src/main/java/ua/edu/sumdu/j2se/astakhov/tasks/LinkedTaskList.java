@@ -3,6 +3,7 @@ package ua.edu.sumdu.j2se.astakhov.tasks;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 /***
  * Class LinkedTaskList
@@ -101,19 +102,6 @@ public class LinkedTaskList extends AbstractTaskList {
         return tail.getTask();
     }
 
-    public LinkedTaskList incoming(int from, int to) {
-        LinkedTaskList linkedTaskList = new LinkedTaskList();
-        Node current = head;
-
-        while(current.next != null) {
-            if (current.task.nextTimeAfter(from) != -1 && current.task.getEndTime() <= to) {
-                linkedTaskList.add(current.task);
-            }
-            current = current.next;
-        }
-        return linkedTaskList;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -193,6 +181,14 @@ public class LinkedTaskList extends AbstractTaskList {
             }
         };
         return linkedIterator;
+    }
+
+    public Stream<Task> getStream() {
+        ArrayTaskList arrayTaskList = new ArrayTaskList();
+        for (int i = 0; i < size; i++) {
+            arrayTaskList.add(getTask(i));
+        }
+        return arrayTaskList.getStream();
     }
 
     @Override
