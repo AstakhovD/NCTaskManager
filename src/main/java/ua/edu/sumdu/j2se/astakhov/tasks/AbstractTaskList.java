@@ -1,6 +1,6 @@
 package ua.edu.sumdu.j2se.astakhov.tasks;
 
-public abstract class AbstractTaskList {
+public abstract class AbstractTaskList implements Iterable<Task>, Cloneable {
 
     public abstract void add(Task task);
 
