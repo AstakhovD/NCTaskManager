@@ -3,6 +3,7 @@ package ua.edu.sumdu.j2se.astakhov.tasks;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.stream.Stream;
 
 
 /***
@@ -86,24 +87,6 @@ public class ArrayTaskList extends AbstractTaskList {
         return list[index];
     }
 
-    /***
-     * Method ArrayTaskList incoming - returns a subset of tasks that were scheduled to run at least once after "from" and no later than "to".
-     *
-     * @param from of type int
-     * @param to of type int
-     * @return the arrayTaskList
-     */
-
-    public ArrayTaskList incoming (int from, int to){
-        ArrayTaskList arrayTaskList = new ArrayTaskList();
-        for (int i = 0; i < size; i++) {
-            if (list[i].nextTimeAfter(from) != -1 && list[i].getEndTime() <= to) {
-                arrayTaskList.add(list[i]);
-            }
-        }
-        return arrayTaskList;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -161,6 +144,10 @@ public class ArrayTaskList extends AbstractTaskList {
                     size--;
                 }
         };
+    }
+
+    public Stream<Task> getStream() {
+        return Stream.of(this.list);
     }
 
     @Override
