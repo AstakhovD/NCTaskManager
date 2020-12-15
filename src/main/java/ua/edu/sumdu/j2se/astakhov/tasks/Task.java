@@ -1,5 +1,6 @@
 package ua.edu.sumdu.j2se.astakhov.tasks;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /***
@@ -12,9 +13,9 @@ import java.util.Objects;
 public class Task implements Cloneable {
 
     private String title;
-    private int time;
-    private int start;
-    private int end;
+    private LocalDateTime time;
+    private LocalDateTime start;
+    private LocalDateTime end;
     private int interval;
     private boolean active;
     private boolean repeated;
@@ -23,14 +24,14 @@ public class Task implements Cloneable {
      * Constructor Task
      *
      * @param title of type String
-     * @param time of type int
+     * @param time of type LocalDateTime
      */
 
-    public Task(String title, int time) {
+    public Task(String title, LocalDateTime time) {
         this.title = title;
         this.time = time;
-        if(time < 0) {
-            throw new IllegalArgumentException("Time can not be a 0");
+        if(time == null) {
+            throw new IllegalArgumentException("Time can not be a null");
         }
     }
 
@@ -38,18 +39,18 @@ public class Task implements Cloneable {
      * Constructor Task
      *
      * @param title of type String
-     * @param start of type int
-     * @param end of type int
+     * @param start of type LocalDateTime
+     * @param end of type LocalDateTime
      * @param interval of type int
      */
 
-    public Task(String title, int start, int end, int interval) {
+    public Task(String title, LocalDateTime start, LocalDateTime end, int interval) {
         this.title = title;
         this.start = start;
         this.end = end;
         this.interval = interval;
         repeated = true;
-        if(start < 0 || end < 0) {
+        if(start == null || end == null) {
             throw new IllegalArgumentException("Time can not be a 0");
         }
     }
@@ -101,7 +102,7 @@ public class Task implements Cloneable {
      * @return the time of this object.
      */
 
-    public int getTime() {
+    public LocalDateTime getTime() {
         if (repeated) {
             return start;
         }
@@ -115,7 +116,7 @@ public class Task implements Cloneable {
      * @param time - the time of this object.
      */
 
-    public void setTime(int time) {
+    public void setTime(LocalDateTime time) {
         if (repeated) {
             repeated = false;
         }
@@ -129,7 +130,7 @@ public class Task implements Cloneable {
      * @return the start of this object
      */
 
-    public int getStartTime() {
+    public LocalDateTime getStartTime() {
         if (!repeated) {
             return time;
         }
@@ -143,7 +144,7 @@ public class Task implements Cloneable {
      * @return the end of this object.
      */
 
-    public int getEndTime() {
+    public LocalDateTime getEndTime() {
         if (!repeated) {
             return time;
         }
@@ -167,12 +168,12 @@ public class Task implements Cloneable {
     /***
      * Method setTime sets repeated, if the task does not repeat.
      *
-     * @param start of type int
-     * @param end of type int
+     * @param start of type LocalDateTime
+     * @param end of type LocalDateTime
      * @param interval of type int
      */
 
-    public void setTime(int start, int end, int interval) {
+    public void setTime(LocalDateTime start, LocalDateTime end, int interval) {
         if (!repeated) {
             repeated = true;
         }
@@ -195,35 +196,38 @@ public class Task implements Cloneable {
      * @return the current of this object
      */
 
-    public int nextTimeAfter(int current) {
-        if (isActive()) {
-            if (getStartTime() > current) {
+    public LocalDateTime nextTimeAfter(LocalDateTime current) {
+        if(!isActive()){
+            return null;
+        }
+        if (isRepeated()) {
+            if(current.isBefore(getStartTime()) ){
                 return getStartTime();
-            } else if ((getEndTime() <= current)) {
-                return -1;
             }
-            if (current + getRepeatInterval() > getEndTime()) {
-                return -1;
+            if(current.isAfter(getEndTime())){
+                return null;
             }
-            if (getRepeatInterval() > 0) {
-                if (getStartTime() >= getEndTime()) {
-                    return -1;
+            else {
+                LocalDateTime time = getStartTime().plusSeconds(0);
+                while (time.isBefore(current) || time.equals(current)){
+                    time = time.plusSeconds(getRepeatInterval());
                 }
-                if (getStartTime() <= current) {
-                    int time = getStartTime();
-                    while (time <= current) {
-                        time += getRepeatInterval();
-                    }
+                if(getEndTime().isAfter(time) || getEndTime().isEqual(time)) {
                     return time;
                 }
-                if (current >= getEndTime()) {
-                    return -1;
+                else {
+                    return null;
                 }
             }
-        } else if (!isActive()) {
-            return -1;
         }
-        return current;
+        else {
+            if(getTime().isAfter(current)){
+                return getTime();
+            }
+            else {
+                return null;
+            }
+        }
     }
 
     @Override
