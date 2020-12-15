@@ -1,5 +1,6 @@
 package ua.edu.sumdu.j2se.astakhov.tasks;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
  *
  */
 
-public class Task implements Cloneable {
+public class Task implements Cloneable, Serializable {
 
     private String title;
     private LocalDateTime time;
