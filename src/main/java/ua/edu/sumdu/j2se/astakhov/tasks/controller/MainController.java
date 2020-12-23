@@ -26,7 +26,7 @@ public class MainController extends Controller {
     @Override
     public int process(AbstractTaskList abstractTaskList)  {
         int action = view.printInfo(abstractTaskList);
-        if(action == 1 || action == 2 || action == 3 || action == 4 || action == 5 || action == 6) {
+        if(action == 1 || action == 2 || action == 3 || action == 4 || action == 5) {
             for(; ; ) {
                 for (Controller controller : controllers) {
                     if(controller.canProcess(action)) {
