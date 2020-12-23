@@ -31,6 +31,5 @@ public abstract class AbstractTaskList implements Iterable<Task>, Cloneable, Ser
         }
         return null;
     }
-
 }
 

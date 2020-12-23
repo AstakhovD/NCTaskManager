@@ -200,3 +200,4 @@ public class LinkedTaskList extends AbstractTaskList {
                 '}';
     }
 }
+
