@@ -7,8 +7,10 @@ import ua.edu.sumdu.j2se.astakhov.tasks.model.ArrayTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.MainView;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
 
+import java.io.IOException;
+
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		System.out.println("Менеджер задач запущен");
 		AbstractTaskList abstractTaskList = new ArrayTaskList();
 		View mainView = new MainView();

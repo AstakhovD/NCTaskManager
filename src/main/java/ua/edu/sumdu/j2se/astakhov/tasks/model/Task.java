@@ -31,6 +31,8 @@ public class Task implements Cloneable, Serializable {
     public Task(String title, LocalDateTime time) {
         this.title = title;
         this.time = time;
+        this.start = time;
+        this.end = time;
         if(time == null) {
             throw new IllegalArgumentException("Time can not be a null");
         }
@@ -211,7 +213,7 @@ public class Task implements Cloneable, Serializable {
             else {
                 LocalDateTime time = getStartTime().plusSeconds(0);
                 while (time.isBefore(current) || time.equals(current)){
-                    time = time.plusSeconds(getRepeatInterval());
+                    time = time.plusMinutes(getRepeatInterval());
                 }
                 if(getEndTime().isAfter(time) || getEndTime().isEqual(time)) {
                     return time;

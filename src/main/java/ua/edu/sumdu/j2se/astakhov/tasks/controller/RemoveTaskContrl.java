@@ -12,8 +12,20 @@ public class RemoveTaskContrl extends Controller {
 
     @Override
     public int process(AbstractTaskList abstractTaskList) {
-        int index = ((RemoveTask)view).removeTask();
-        abstractTaskList.remove(abstractTaskList.getTask(index));
+        int taskChoose = ((RemoveTask) view).taskChoose();
+        if(taskChoose == 1) {
+            int index = ((RemoveTask) view).removeTask();
+            if(index >= abstractTaskList.size()) {
+                System.out.println("Ошибка: задачи с таким индексом не существует");
+                return Controller.REMOVE_TASK;
+            }
+            abstractTaskList.remove(abstractTaskList.getTask(index));
+        } else if(taskChoose == 2) {
+            return Controller.MAIN_MENU;
+        } else {
+            System.out.println("Ошибка: Вы выбрали неправильную цифру");
+            return Controller.REMOVE_TASK;
+        }
         return view.printInfo(abstractTaskList);
     }
 }

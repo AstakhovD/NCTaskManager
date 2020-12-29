@@ -12,7 +12,9 @@ public class MainView implements View{
         System.out.println("2 - добавить задачу");
         System.out.println("3 - удалить задачу");
         System.out.println("4 - календарь");
-        System.out.println("5 - выйти из программы");
+        System.out.println("5 - сохранить/загрузить задачу");
+        System.out.println("6 - информация о задачах");
+        System.out.println("7 - выйти из программы");
         int taskManager = 0;
         try {
             taskManager = Integer.parseInt(bufferedReader.readLine());

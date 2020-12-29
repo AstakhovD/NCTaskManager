@@ -3,13 +3,17 @@ package ua.edu.sumdu.j2se.astakhov.tasks.controller;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
 
+import java.io.IOException;
+
 public abstract class Controller {
     public static final int MAIN_MENU = 0;
     public static final int TASK_LIST = 1;
     public static final int ADD_TASK = 2;
     public static final int REMOVE_TASK = 3;
     public static final int CALENDAR = 4;
-    public static final int EXIT = 5;
+    public static final int SAVE_TASK = 5;
+    public static final int INFO_TASK = 6;
+    public static final int EXIT = 7;
 
     protected View view;
     protected int actionToDo = 0;
@@ -23,5 +27,5 @@ public abstract class Controller {
         return action == actionToDo;
     }
 
-    public abstract int process(AbstractTaskList abstractTaskList);
+    public abstract int process(AbstractTaskList abstractTaskList) throws IOException;
 }

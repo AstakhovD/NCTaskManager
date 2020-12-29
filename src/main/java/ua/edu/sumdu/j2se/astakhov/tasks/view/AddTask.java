@@ -4,10 +4,11 @@ import ua.edu.sumdu.j2se.astakhov.tasks.controller.Controller;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class AddTask implements View {
+public class AddTask implements View, TaskChoose {
     @Override
     public int printInfo(AbstractTaskList abstractTaskList) {
         System.out.println("Новая задача была добавлена");
@@ -43,40 +44,55 @@ public class AddTask implements View {
 
     public LocalDateTime taskTime() {
         System.out.println("Введите дату (Пример: 2021-07-15 14:32)");
+        LocalDateTime time = null;
         String date = " ";
         try {
             date = bufferedReader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");
-        LocalDateTime time = LocalDateTime.parse(date, dateTimeFormatter);
+        try{
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");
+            time = LocalDateTime.parse(date, dateTimeFormatter);
+        } catch (DateTimeException e) {
+            return time = LocalDateTime.now();
+        }
         return time;
     }
 
     public LocalDateTime startTime() {
-        System.out.println("Введите дату (Пример: 2021-07-15 14:32)");
+        System.out.println("Введите дату начала Вашей задачи (Пример: 2021-07-15 14:32)");
+        LocalDateTime start = null;
         String date = " ";
         try {
             date = bufferedReader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");
-        LocalDateTime start = LocalDateTime.parse(date, dateTimeFormatter);
+        try {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");
+            start = LocalDateTime.parse(date, dateTimeFormatter);
+        } catch (DateTimeException e) {
+            return start = LocalDateTime.now();
+        }
         return start;
     }
 
     public LocalDateTime endTime() {
-        System.out.println("Введите дату (Пример: 2021-07-15 14:32)");
+        System.out.println("Введите дату окончания Вашей задачи(Пример: 2021-07-15 14:32)");
+        LocalDateTime end = null;
         String date = " ";
         try {
             date = bufferedReader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");
-        LocalDateTime end = LocalDateTime.parse(date, dateTimeFormatter);
+        try {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");
+            end = LocalDateTime.parse(date, dateTimeFormatter);
+        } catch (DateTimeException e) {
+            return end = LocalDateTime.now().minusSeconds(1);
+        }
         return end;
     }
 
@@ -87,7 +103,7 @@ public class AddTask implements View {
             String task = bufferedReader.readLine();
             interval = Integer.parseInt(task);
         } catch (IOException e) {
-            e.printStackTrace();
+            interval = Integer.MAX_VALUE;
         }
         return interval;
     }
