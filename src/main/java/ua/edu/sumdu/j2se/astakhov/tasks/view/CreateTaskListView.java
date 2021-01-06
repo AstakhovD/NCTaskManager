@@ -8,7 +8,14 @@ public class CreateTaskListView implements View {
     public int printInfo(AbstractTaskList abstractTaskList) {
         System.out.println("Просмотр задач");
         for (int i = 0; i < abstractTaskList.size(); i++) {
-            System.out.println(i + "." + abstractTaskList.getTask(i));
+            if(abstractTaskList.getTask(i).isRepeated()) {
+                System.out.println("Номер задачи " + i + ". Название задачи - " + abstractTaskList.getTask(i).getTitle() +
+                        ", время начала - " + abstractTaskList.getTask(i).getStartTime() + ", время окончания - " + abstractTaskList.getTask(i).getEndTime() +
+                        ", интервал - " + abstractTaskList.getTask(i).getRepeatInterval() + ", активность - " + abstractTaskList.getTask(i).isActive());
+            } else {
+                System.out.println("Номер задачи " + i + ". Название задачи - " + abstractTaskList.getTask(i).getTitle() +
+                        ", время - " + abstractTaskList.getTask(i).getTime() + ", активность - " + abstractTaskList.getTask(i).isActive());
+            }
         }
         return Controller.MAIN_MENU;
     }

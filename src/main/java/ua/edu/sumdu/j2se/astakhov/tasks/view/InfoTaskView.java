@@ -16,9 +16,8 @@ public class InfoTaskView implements View {
     public int taskChoose() {
         System.out.println("Информация о задачах");
         System.out.println("Выберите действие");
-        System.out.println("1 - просмотреть задачу по индексу");
-        System.out.println("2 - установить активной/неактивной задачу");
-        System.out.println("3 - вернуться в главное меню");
+        System.out.println("1 - установить режим задачи");
+        System.out.println("2 - вернуться в главное меню");
         int task = 0;
         try {
             String taskName = bufferedReader.readLine();
@@ -32,7 +31,7 @@ public class InfoTaskView implements View {
     public int index() {
         int index = 0;
         try {
-            System.out.println("Выберите задачу по индексу");
+            System.out.println("Введите номер задачи");
                 String taskName = bufferedReader.readLine();
                 index = Integer.parseInt(taskName);
             } catch (IOException e) {
@@ -45,8 +44,8 @@ public class InfoTaskView implements View {
         int mode = 0;
         try {
             System.out.println("Установить режим");
-            System.out.println("1 - активной");
-            System.out.println("2 - неактивной");
+            System.out.println("1 - активный режим");
+            System.out.println("2 - режим ожидания");
             String taskName = bufferedReader.readLine();
             mode = Integer.parseInt(taskName);
         } catch (IOException e) {

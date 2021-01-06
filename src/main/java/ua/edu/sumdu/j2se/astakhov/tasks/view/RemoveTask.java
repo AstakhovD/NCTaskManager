@@ -13,7 +13,7 @@ public class RemoveTask implements View, TaskChoose {
     }
 
     public int removeTask() {
-        System.out.println("Укажите задачу");
+        System.out.println("Укажите номер задачи");
         int task = 0;
         try {
             String taskName = bufferedReader.readLine();
@@ -27,7 +27,7 @@ public class RemoveTask implements View, TaskChoose {
     @Override
     public int taskChoose() {
         System.out.println("Удалить задачу?");
-        System.out.println("1 - да");
+        System.out.println("1 - удалить");
         System.out.println("2 - вернуться в главное меню");
         int task = 0;
         try {

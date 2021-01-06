@@ -1,5 +1,6 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.controller;
 
+import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.InfoTaskView;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
@@ -8,6 +9,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class InfoTaskController extends Controller {
+
+    private static final Logger logger = Logger.getLogger(NotificationController.class);
 
     public InfoTaskController(View view, int actionToDo) {
         super(view, actionToDo);
@@ -19,17 +22,10 @@ public class InfoTaskController extends Controller {
         int taskChoose = ((InfoTaskView) view).taskChoose();
         if(taskChoose == 1) {
             index = ((InfoTaskView) view).index();
-            if(index >= abstractTaskList.size()) {
-                System.out.println("Ошибка: задачи с таким индексом не существует");
-                return Controller.INFO_TASK;
-            }
-            System.out.println(abstractTaskList.getTask(index));
-            return Controller.INFO_TASK;
-        } else if(taskChoose == 2) {
-            index = ((InfoTaskView) view).index();
-            if(index >= abstractTaskList.size()) {
-                System.out.println("Ошибка: задачи с таким индексом не существует");
-                return Controller.INFO_TASK;
+            if(index >= abstractTaskList.size() || index == Integer.MAX_VALUE || abstractTaskList.size() - 1 < index) {
+                logger.error("Ошибка: задачи с таким номером не существует");
+                System.out.println("Ошибка: задачи с таким номером не существует");
+                return Controller.ACTIVE_TASK;
             } else {
                 int mode = ((InfoTaskView) view).activityMode();
                 if(mode == 1) {
@@ -43,10 +39,13 @@ public class InfoTaskController extends Controller {
                         abstractTaskList.remove(abstractTaskList.getTask(index));
                     }
                 } else {
+                    logger.error("Ошибка: Вы ввели неверное число");
                     System.out.println("Ошибка: Вы ввели неверное число");
-                    return Controller.INFO_TASK;
+                    return ACTIVE_TASK;
                 }
             }
+        } else if(taskChoose == 2) {
+            return MAIN_MENU;
         }
         return view.printInfo(abstractTaskList);
     }

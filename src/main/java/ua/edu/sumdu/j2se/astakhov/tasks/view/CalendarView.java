@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.astakhov.tasks.view;
 
 import ua.edu.sumdu.j2se.astakhov.tasks.controller.Controller;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
+import ua.edu.sumdu.j2se.astakhov.tasks.model.Task;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.Tasks;
 
 import java.io.IOException;
@@ -9,9 +10,12 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
+import java.util.SortedMap;
 
 
 public class CalendarView implements View, TaskChoose {
+
     @Override
     public int printInfo(AbstractTaskList abstractTaskList) {
         System.out.println("Просмотр календаря");
@@ -22,62 +26,33 @@ public class CalendarView implements View, TaskChoose {
             return Controller.CALENDAR;
         }
         if(end.isBefore(LocalDateTime.now())) {
-            System.out.println("Ошибка: неожиданное время начало задачи");
+            System.out.println("Ошибка: неожиданное время окончания задачи");
             return Controller.CALENDAR;
         }
-        System.out.println("Не повторяющиеся: ");
-        for(int i = 0; i < abstractTaskList.size(); i++) {
-            if(abstractTaskList.getTask(i).getRepeatInterval() == 0) {
-                System.out.println(abstractTaskList.getTask(i).getTime() + " = " + abstractTaskList.getTask(i));
+        SortedMap<LocalDateTime, Set<Task>> tasks = Tasks.calendar(abstractTaskList, start, end);
+        for(SortedMap.Entry<LocalDateTime, Set<Task>> elements : tasks.entrySet()) {
+            for(Task task : elements.getValue()) {
+                System.out.println("Название - " + task.getTitle());
             }
+            System.out.println(elements.getKey() + "\n");
         }
-        System.out.println("");
-        System.out.println("Повторяющиеся: ");
-        Tasks.calendar(abstractTaskList, start, end).forEach((localDateTime, tasks1) ->
-                System.out.println(localDateTime + " = " + abstractTaskList.getTask(0)));
         return Controller.MAIN_MENU;
     }
 
     public LocalDateTime taskStart() {
-        System.out.println("Укажите дату начала (Пример: 2021-07-15 14:32)");
-        String date = "";
-        LocalDateTime start;
-        try {
-            date = bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");
-            start = LocalDateTime.parse(date, dateTimeFormatter);
-        } catch (DateTimeException e) {
-            return LocalDateTime.ofEpochSecond(1, 1, ZoneOffset.UTC).minusYears(999);
-        }
-        return start;
+        System.out.println("Укажите дату начала Вашей задачи (Пример: 2021-07-15 14:32)");
+        return times();
     }
 
     public LocalDateTime taskEnd() {
-        System.out.println("Укажите дату конца (Пример: 2021-07-15 14:32)");
-        String date = "";
-        LocalDateTime end;
-        try {
-            date = bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");
-            end = LocalDateTime.parse(date, dateTimeFormatter);
-        } catch (DateTimeException e) {
-            return LocalDateTime.now().minusYears(999);
-        }
-        return end;
+        System.out.println("Укажите дату окончания Вашей задачи (Пример: 2021-07-15 14:32)");
+        return times();
     }
 
     @Override
     public int taskChoose() {
         System.out.println("Выберите что нужно сделать");
-        System.out.println("1 - проверить задачи");
+        System.out.println("1 - просмотреть активность задач");
         System.out.println("2 - вернуться в главное меню");
 
         int taskType = 0;
@@ -89,5 +64,22 @@ public class CalendarView implements View, TaskChoose {
             return Controller.CALENDAR;
         }
         return taskType;
+    }
+
+    public LocalDateTime times() {
+        String date = "";
+        LocalDateTime time;
+        try {
+            date = bufferedReader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");
+            time = LocalDateTime.parse(date, dateTimeFormatter);
+        } catch (DateTimeException e) {
+            return LocalDateTime.ofEpochSecond(1, 1, ZoneOffset.UTC).minusYears(999);
+        }
+        return time;
     }
 }

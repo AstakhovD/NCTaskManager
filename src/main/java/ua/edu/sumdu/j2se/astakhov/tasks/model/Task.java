@@ -17,6 +17,7 @@ public class Task implements Cloneable, Serializable {
     private LocalDateTime time;
     private LocalDateTime start;
     private LocalDateTime end;
+    private int repeatInterval;
     private int interval;
     private boolean active;
     private boolean repeated;
@@ -29,13 +30,19 @@ public class Task implements Cloneable, Serializable {
      */
 
     public Task(String title, LocalDateTime time) {
-        this.title = title;
-        this.time = time;
-        this.start = time;
-        this.end = time;
+        setTitle(title);
+        setTime(time);
         if(time == null) {
             throw new IllegalArgumentException("Time can not be a null");
         }
+    }
+
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
     }
 
     /***
@@ -51,8 +58,8 @@ public class Task implements Cloneable, Serializable {
         this.title = title;
         this.start = start;
         this.end = end;
-        this.interval = interval;
-        repeated = true;
+        this.repeatInterval = interval;
+        setTime(start, end, interval);
         if(start == null || end == null) {
             throw new IllegalArgumentException("Time can not be a 0");
         }
@@ -165,7 +172,11 @@ public class Task implements Cloneable, Serializable {
         if (!repeated) {
             return 0;
         }
-        return interval;
+        return repeatInterval;
+    }
+
+    public void setRepeatInterval(int repeatInterval) {
+        this.repeatInterval = repeatInterval;
     }
 
     /***
@@ -236,17 +247,14 @@ public class Task implements Cloneable, Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Task)) return false;
 
         Task task = (Task) o;
 
-        if (time != task.time) return false;
-        if (start != task.start) return false;
-        if (end != task.end) return false;
-        if (interval != task.interval) return false;
-        if (active != task.active) return false;
-        if (repeated != task.repeated) return false;
-        return Objects.equals(title, task.title);
+        return  (getTime() != task.getTime()) &&
+         (getStartTime() != task.getStartTime()) && (getEndTime() != task.getEndTime()) &&
+         (getRepeatInterval() != task.getRepeatInterval()) && (isRepeated() != task.isRepeated()) && (isActive() == task.isActive())
+                && Objects.equals(getTitle(), task.getTitle());
     }
 
     @Override

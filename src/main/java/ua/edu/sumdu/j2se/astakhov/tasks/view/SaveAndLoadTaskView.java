@@ -23,7 +23,7 @@ public class SaveAndLoadTaskView implements View, TaskChoose {
     public String fileName() {
         String file = "";
         try {
-            System.out.println("Введите название файла");
+            System.out.println("Введите имя файла");
             file = bufferedReader.readLine();
         } catch (IOException e) {
             e.printStackTrace();

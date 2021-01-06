@@ -8,18 +8,19 @@ public class MainView implements View{
     @Override
     public int printInfo(AbstractTaskList abstractTaskList) {
         System.out.println("Выберите что нужно сделать");
-        System.out.println("1 - просмотреть задачи");
-        System.out.println("2 - добавить задачу");
-        System.out.println("3 - удалить задачу");
-        System.out.println("4 - календарь");
-        System.out.println("5 - сохранить/загрузить задачу");
-        System.out.println("6 - информация о задачах");
-        System.out.println("7 - выйти из программы");
+        System.out.println("1 - Просмотреть задачи");
+        System.out.println("2 - Добавить новую задачу");
+        System.out.println("3 - Удалить задачу");
+        System.out.println("4 - Календарь");
+        System.out.println("5 - Сохранить/загрузить задачу");
+        System.out.println("6 - Изменение активность задачи");
+        System.out.println("7 - Редактирование задач");
+        System.out.println("8 - Выйти из программы");
         int taskManager = 0;
         try {
             taskManager = Integer.parseInt(bufferedReader.readLine());
         } catch (IOException e) {
-            e.printStackTrace();
+            return 0;
         }
         return taskManager;
     }

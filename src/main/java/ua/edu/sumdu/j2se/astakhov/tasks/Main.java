@@ -9,7 +9,7 @@ import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
 
 import java.io.IOException;
 
-public class Main {
+public class Main extends Thread{
 	public static void main(String[] args) throws IOException {
 		System.out.println("Менеджер задач запущен");
 		AbstractTaskList abstractTaskList = new ArrayTaskList();

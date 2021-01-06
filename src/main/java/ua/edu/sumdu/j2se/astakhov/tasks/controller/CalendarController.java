@@ -1,14 +1,17 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.controller;
 
+import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.CalendarView;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
 
 import java.io.IOException;
 
-public class CalendarContrl extends Controller {
+public class CalendarController extends Controller {
 
-    public CalendarContrl(View view, int actionToDo) {
+    private static final Logger logger = Logger.getLogger(CalendarView.class);
+
+    public CalendarController(View view, int actionToDo) {
         super(view, actionToDo);
     }
 
