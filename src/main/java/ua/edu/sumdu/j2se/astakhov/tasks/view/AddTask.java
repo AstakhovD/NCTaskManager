@@ -61,7 +61,7 @@ public class AddTask implements View, TaskChoose {
 
     public int repeatableOfTask() {
         System.out.println("Введите интервал выполнения Вашей задачи");
-        int interval = 0;
+        int interval;
         try {
             String task = bufferedReader.readLine();
             interval = Integer.parseInt(task);

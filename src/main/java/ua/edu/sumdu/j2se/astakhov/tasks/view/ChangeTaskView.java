@@ -15,7 +15,7 @@ public class ChangeTaskView implements View, TaskChoose {
     public int taskChoose() {
         System.out.println("1 - Изменить параметр задачи");
         System.out.println("2 - Вернуться в главное меню");
-        int taskType = 0;
+        int taskType;
         try {
             String taskName = bufferedReader.readLine();
             taskType = Integer.parseInt(taskName);
@@ -35,7 +35,7 @@ public class ChangeTaskView implements View, TaskChoose {
         System.out.println("2 - Изменить время задачи");
         System.out.println("3 - Изменить интервал выполнения задачи");
         System.out.println("4 - вернуться назад");
-        int taskType = 0;
+        int taskType;
         try {
             String taskName = bufferedReader.readLine();
             taskType = Integer.parseInt(taskName);
@@ -49,7 +49,7 @@ public class ChangeTaskView implements View, TaskChoose {
         System.out.println("1 - Изменить название задачи");
         System.out.println("2 - Изменить время задачи");
         System.out.println("3 - вернуться назад");
-        int taskType = 0;
+        int taskType;
         try {
             String taskName = bufferedReader.readLine();
             taskType = Integer.parseInt(taskName);
@@ -61,7 +61,7 @@ public class ChangeTaskView implements View, TaskChoose {
 
     public int interval() {
         System.out.println("Укажите новый интервал выполнение задачи: ");
-        int interval = 0;
+        int interval;
         try {
             String taskName = bufferedReader.readLine();
             interval = Integer.parseInt(taskName);
@@ -73,7 +73,7 @@ public class ChangeTaskView implements View, TaskChoose {
 
     public int index() {
         System.out.println("Укажите номер задачи которую нужно изменить: ");
-        int index = 0;
+        int index;
         try {
             String taskName = bufferedReader.readLine();
             index = Integer.parseInt(taskName);

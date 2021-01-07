@@ -55,7 +55,7 @@ public class CalendarView implements View, TaskChoose {
         System.out.println("1 - просмотреть активность задач");
         System.out.println("2 - вернуться в главное меню");
 
-        int taskType = 0;
+        int taskType;
 
         try {
             String taskName = bufferedReader.readLine();

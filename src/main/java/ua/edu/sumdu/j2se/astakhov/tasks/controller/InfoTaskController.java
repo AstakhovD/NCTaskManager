@@ -5,7 +5,6 @@ import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.InfoTaskView;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class InfoTaskController extends Controller {
@@ -17,12 +16,12 @@ public class InfoTaskController extends Controller {
     }
 
     @Override
-    public int process(AbstractTaskList abstractTaskList) throws IOException {
+    public int process(AbstractTaskList abstractTaskList) {
         int index;
         int taskChoose = ((InfoTaskView) view).taskChoose();
         if(taskChoose == 1) {
             index = ((InfoTaskView) view).index();
-            if(index >= abstractTaskList.size() || index == Integer.MAX_VALUE || abstractTaskList.size() - 1 < index) {
+            if(index >= abstractTaskList.size() || abstractTaskList.size() - 1 < index) {
                 logger.error("Ошибка: задачи с таким номером не существует");
                 System.out.println("Ошибка: задачи с таким номером не существует");
                 return Controller.ACTIVE_TASK;

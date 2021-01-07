@@ -12,8 +12,8 @@ import java.util.List;
 
 public class MainController extends Controller {
 
-    private AbstractTaskList abstractTaskList;
-    private List<Controller> controllers = new ArrayList<>();
+    private final AbstractTaskList abstractTaskList;
+    private final List<Controller> controllers = new ArrayList<>();
 
     public MainController(AbstractTaskList abstractTaskList, View view) {
         super(view, Controller.MAIN_MENU);
@@ -44,16 +44,13 @@ public class MainController extends Controller {
     public int process(AbstractTaskList abstractTaskList) throws IOException {
         int action = view.printInfo(abstractTaskList);
         if(action == 1 || action == 2 || action == 3 || action == 4 || action == 5 || action == 6 || action == 7 || action == 8) {
-            for(; ;) {
+            do {
                 for (Controller controller : controllers) {
-                    if(controller.canProcess(action)) {
+                    if (controller.canProcess(action)) {
                         action = controller.process(this.abstractTaskList);
                     }
                 }
-                if(action == EXIT) {
-                    break;
-                }
-            }
+            } while (action != EXIT);
         }
         return EXIT;
     }

@@ -5,7 +5,6 @@ import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.ChangeTaskView;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 
@@ -17,7 +16,7 @@ public class ChangeTaskController extends Controller {
         super(view, actionToDo);
     }
     @Override
-    public int process(AbstractTaskList abstractTaskList) throws IOException {
+    public int process(AbstractTaskList abstractTaskList) {
         int taskChoose = ((ChangeTaskView) view).taskChoose();
         if(taskChoose == 1) {
             int index = ((ChangeTaskView) view).index();

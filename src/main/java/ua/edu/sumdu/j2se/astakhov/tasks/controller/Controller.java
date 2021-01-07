@@ -17,7 +17,7 @@ public abstract class Controller {
     public static final int EXIT = 8;
 
     protected View view;
-    protected int actionToDo = 0;
+    protected int actionToDo;
 
     public Controller(View view, int actionToDo) {
         this.view = view;

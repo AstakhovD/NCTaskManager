@@ -22,7 +22,7 @@ public class AddTaskController extends Controller {
     }
 
     @Override
-    public int process(AbstractTaskList abstractTaskList) throws IOException {
+    public int process(AbstractTaskList abstractTaskList) {
         int taskChoose = ((AddTask) view).taskChoose();
         if(taskChoose == 1) {
             String taskName = ((AddTask) view).taskTitle();

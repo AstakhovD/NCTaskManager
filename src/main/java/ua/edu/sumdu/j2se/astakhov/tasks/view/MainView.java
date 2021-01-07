@@ -16,7 +16,7 @@ public class MainView implements View{
         System.out.println("6 - Изменение активность задачи");
         System.out.println("7 - Редактирование задач");
         System.out.println("8 - Выйти из программы");
-        int taskManager = 0;
+        int taskManager;
         try {
             taskManager = Integer.parseInt(bufferedReader.readLine());
         } catch (IOException e) {

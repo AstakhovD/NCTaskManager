@@ -18,7 +18,7 @@ public class RemoveTaskController extends Controller {
         int taskChoose = ((RemoveTask) view).taskChoose();
         if(taskChoose == 1) {
             int index = ((RemoveTask) view).removeTask();
-            if(index >= abstractTaskList.size() || index == Integer.MAX_VALUE || abstractTaskList.size() - 1 < index) {
+            if(index >= abstractTaskList.size() || abstractTaskList.size() - 1 < index) {
                 logger.error("Ошибка: задачи с таким номером не существует");
                 System.out.println("Ошибка: задачи с таким номером не существует");
                 return REMOVE_TASK;

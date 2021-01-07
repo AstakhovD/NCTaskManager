@@ -15,7 +15,7 @@ public class NotificationController extends Thread {
 
     private static final Logger logger = Logger.getLogger(NotificationController.class);
     NotificationView view;
-    private AbstractTaskList abstractTaskList;
+    private final AbstractTaskList abstractTaskList;
 
     public NotificationController(NotificationView view, AbstractTaskList abstractTaskList) {
         this.view = view;
