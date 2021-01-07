@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 public class InfoTaskController extends Controller {
 
-    private static final Logger logger = Logger.getLogger(NotificationController.class);
+    private static final Logger logger = Logger.getLogger(InfoTaskController.class);
 
     public InfoTaskController(View view, int actionToDo) {
         super(view, actionToDo);

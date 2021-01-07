@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 public class AddTaskController extends Controller {
 
-    private static final Logger logger = Logger.getLogger(NotificationController.class);
+    private static final Logger logger = Logger.getLogger(AddTaskController.class);
 
     public AddTaskController(View view, int actionToDo) {
         super(view, actionToDo);
@@ -30,15 +30,18 @@ public class AddTaskController extends Controller {
             LocalDateTime end = ((AddTask) view).endTime();
             int interval = ((AddTask) view).repeatableOfTask();
             if(start.isBefore(LocalDateTime.now())) {
-                System.out.println("Ошибка: неожиданное время");
+                logger.error("Ошибка: неожиданное время начала задачи");
+                System.out.println("Ошибка: неожиданное время начала задачи");
                 return Controller.ADD_TASK;
             }
             if(end.isBefore(LocalDateTime.now())) {
-                System.out.println("Ошибка: неожиданное время");
+                logger.error("Ошибка: неожиданное время окончания задачи");
+                System.out.println("Ошибка: неожиданное время окончания задачи");
                 return Controller.ADD_TASK;
             }
             if(interval == Integer.MAX_VALUE || interval <= 0) {
-                System.out.println("Ошибка: неожиданный интервал");
+                logger.error("Ошибка: неожиданный интервал выполнения задачи");
+                System.out.println("Ошибка: неожиданный интервал выполнения задачи");
                 return Controller.ADD_TASK;
             }
             Task task = new Task(taskName, start, end, interval);
@@ -50,6 +53,7 @@ public class AddTaskController extends Controller {
             String taskName = ((AddTask) view).taskTitle();
             LocalDateTime time = ((AddTask) view).taskTime();
             if(time.isBefore(LocalDateTime.now())) {
+                logger.error("Ошибка: неожиданное время");
                 System.out.println("Ошибка: неожиданное время");
                 return Controller.ADD_TASK;
             }

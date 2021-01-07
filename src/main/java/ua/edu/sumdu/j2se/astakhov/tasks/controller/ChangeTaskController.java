@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 public class ChangeTaskController extends Controller {
 
-    private static final Logger logger = Logger.getLogger(NotificationController.class);
+    private static final Logger logger = Logger.getLogger(ChangeTaskController.class);
 
     public ChangeTaskController(View view, int actionToDo) {
         super(view, actionToDo);
@@ -22,8 +22,8 @@ public class ChangeTaskController extends Controller {
         if(taskChoose == 1) {
             int index = ((ChangeTaskView) view).index();
             if(index == Integer.MAX_VALUE || abstractTaskList.size() <= 0 || abstractTaskList.size() - 1 < index) {
-                logger.error("Ошибка: Неожиданный индекс");
-                System.out.println("Ошибка: Неожиданный индекс");
+                logger.error("Ошибка: Неожиданный номер задачи");
+                System.out.println("Ошибка: Неожиданный номер задачи");
                 return CHANGE_TASK;
             }
             if(abstractTaskList.getTask(index).isRepeated()) {
@@ -47,14 +47,15 @@ public class ChangeTaskController extends Controller {
                 } else if(taskChooseRepeatable == 3) {
                     int interval = ((ChangeTaskView) view).interval();
                     if(interval == Integer.MAX_VALUE || interval <= 0) {
-                        logger.error("Ошибка: Неожиданный интервал");
-                        System.out.println("Ошибка: Неожиданный интервал");
+                        logger.error("Ошибка: неожиданный интервал выполнения задачи");
+                        System.out.println("Ошибка: неожиданный интервал выполнения задачи");
                         return CHANGE_TASK;
                     }
                     abstractTaskList.getTask(index).setRepeatInterval(interval);
                 } else if(taskChooseRepeatable == 4) {
                     return CHANGE_TASK;
                 } else {
+                    logger.error("Ошибка: Вы ввели неверное число");
                     System.out.println("Ошибка: Вы ввели неверное число");
                     return CHANGE_TASK;
                 }
@@ -74,6 +75,7 @@ public class ChangeTaskController extends Controller {
                 } else if(taskChooseNotRepeatable == 3) {
                     return CHANGE_TASK;
                 } else {
+                    logger.error("Ошибка: Вы ввели неверное число");
                     System.out.println("Ошибка: Вы ввели неверное число");
                     return CHANGE_TASK;
                 }

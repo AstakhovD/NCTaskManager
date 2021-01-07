@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class SaveAndLoadTaskController extends Controller {
 
-    private static final Logger logger = Logger.getLogger(NotificationController.class);
+    private static final Logger logger = Logger.getLogger(SaveAndLoadTaskController.class);
 
     public SaveAndLoadTaskController(View view, int actionToDo) {
         super(view, actionToDo);
@@ -29,6 +29,7 @@ public class SaveAndLoadTaskController extends Controller {
                 String fileName = ((SaveAndLoadTaskView) view).fileName();
                 TaskIO.write(abstractTaskList, new FileWriter(new File("saves/" + fileName + ".json")));
             } catch (IOException e) {
+                logger.error("Ошибка: Файл не был найден");
                 System.out.println("Ошибка: Файл не был найден");
                 return Controller.SAVE_TASK;
             }

@@ -7,7 +7,7 @@ import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
 
 public class RemoveTaskController extends Controller {
 
-    private static final Logger logger = Logger.getLogger(NotificationController.class);
+    private static final Logger logger = Logger.getLogger(RemoveTaskController.class);
 
     public RemoveTaskController(View view, int actionToDo) {
         super(view, actionToDo);

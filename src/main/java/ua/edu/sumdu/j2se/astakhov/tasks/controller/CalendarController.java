@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class CalendarController extends Controller {
 
-    private static final Logger logger = Logger.getLogger(CalendarView.class);
+    private static final Logger logger = Logger.getLogger(CalendarController.class);
 
     public CalendarController(View view, int actionToDo) {
         super(view, actionToDo);
@@ -23,6 +23,7 @@ public class CalendarController extends Controller {
         } else if (taskChoose == 2){
         return Controller.MAIN_MENU;
         } else {
+            logger.error("Ошибка: Вы ввели неверное число");
             System.out.println("Ошибка: Вы ввели неверное число");
             return Controller.CALENDAR;
         }
