@@ -1,9 +1,27 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.view;
 
+import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import java.io.IOException;
 
-public class MainView implements View{
+import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.WRONG_NUMBER;
+
+/**
+ * Class AddTaskView realizes main view.
+ *
+ * @author Астахов Дмитрій
+ */
+
+public class MainView implements View {
+
+    private static final Logger logger = Logger.getLogger(MainView.class);
+
+    /**
+     * Method printInfo displays functionality of application.
+     *
+     * @param abstractTaskList of type AbstractTaskList
+     * @return taskManager of this object
+     */
 
     @Override
     public int printInfo(AbstractTaskList abstractTaskList) {
@@ -20,7 +38,9 @@ public class MainView implements View{
         try {
             taskManager = Integer.parseInt(bufferedReader.readLine());
         } catch (IOException e) {
-            return 0;
+            logger.error(WRONG_NUMBER);
+            System.out.println(WRONG_NUMBER);
+            return printInfo(abstractTaskList);
         }
         return taskManager;
     }

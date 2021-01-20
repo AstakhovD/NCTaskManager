@@ -1,5 +1,6 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.controller;
 
+import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.TaskIO;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.*;
@@ -10,7 +11,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.FILE_NOT_FOUND;
+
+/**
+ * Class MainController realizes main controller.
+ *
+ * @author Астахов Дмитрій
+ */
+
 public class MainController extends Controller {
+
+    private static final Logger logger = Logger.getLogger(MainController.class);
 
     private final AbstractTaskList abstractTaskList;
     private final List<Controller> controllers = new ArrayList<>();
@@ -21,8 +32,8 @@ public class MainController extends Controller {
 
         controllers.add(this);
         controllers.add(new CreateTaskListController(new CreateTaskListView(), Controller.TASK_LIST));
-        controllers.add(new AddTaskController(new AddTask(), Controller.ADD_TASK));
-        controllers.add(new RemoveTaskController(new RemoveTask(), Controller.REMOVE_TASK));
+        controllers.add(new AddTaskController(new AddTaskView(), Controller.ADD_TASK));
+        controllers.add(new RemoveTaskController(new RemoveTaskView(), Controller.REMOVE_TASK));
         controllers.add(new CalendarController(new CalendarView(), Controller.CALENDAR));
         controllers.add(new SaveAndLoadTaskController(new SaveAndLoadTaskView(), Controller.SAVE_TASK));
         controllers.add((new InfoTaskController(new InfoTaskView(), Controller.ACTIVE_TASK)));
@@ -35,10 +46,19 @@ public class MainController extends Controller {
             try {
                 TaskIO.read(abstractTaskList, new FileReader("saves/autoSave.json"));
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error(FILE_NOT_FOUND);
+                view.exception(FILE_NOT_FOUND);
             }
         }
     }
+
+    /**
+     * Method process realizes action to be performed.
+     *
+     * @param abstractTaskList of type AbstractTaskList
+     * @return exit the program
+     * @throws IOException input|output exception, failure during reading, writing information
+     */
 
     @Override
     public int process(AbstractTaskList abstractTaskList) throws IOException {

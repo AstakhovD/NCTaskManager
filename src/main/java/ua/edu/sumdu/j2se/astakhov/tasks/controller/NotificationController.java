@@ -11,16 +11,35 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.SortedMap;
 
+import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.ERROR;
+
+/**
+ * Class NotificationController realizes notification for Tasks.
+ *
+ * @author Астахов Дмитрій
+ */
+
 public class NotificationController extends Thread {
 
     private static final Logger logger = Logger.getLogger(NotificationController.class);
     NotificationView view;
     private final AbstractTaskList abstractTaskList;
 
+    /**
+     * Constructor NotificationController
+     *
+     * @param view of type NotificationView
+     * @param abstractTaskList of AbstractTaskList
+     */
+
     public NotificationController(NotificationView view, AbstractTaskList abstractTaskList) {
         this.view = view;
         this.abstractTaskList = abstractTaskList;
     }
+
+    /**
+     * Method run starts check tasks.
+     */
 
     @Override
     public void run() {
@@ -39,7 +58,7 @@ public class NotificationController extends Thread {
             } try {
                 Thread.sleep(Duration.between(LocalDateTime.now(), LocalDateTime.now().plusMinutes(1)).toMillis());
             } catch (InterruptedException e) {
-                logger.error(e);
+                logger.error(ERROR);
             }
         }
     }

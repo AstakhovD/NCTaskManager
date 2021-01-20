@@ -1,5 +1,6 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.view;
 
+import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.controller.Controller;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.Task;
@@ -10,11 +11,29 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedMap;
 
+import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Controller.MAIN_MENU;
+import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.*;
+
+/**
+ * Class CalendarView realizes calendar for Tasks.
+ *
+ * @author Астахов Дмитрій
+ */
 
 public class CalendarView implements View, TaskChoose {
+
+    private static final Logger logger = Logger.getLogger(CalendarView.class);
+
+    /**
+     * Method printInfo shows result.
+     *
+     * @param abstractTaskList of type AbstractTaskList
+     * @return back to the "MAIN_MENU" menu
+     */
 
     @Override
     public int printInfo(AbstractTaskList abstractTaskList) {
@@ -22,11 +41,13 @@ public class CalendarView implements View, TaskChoose {
         LocalDateTime start = taskStart();
         LocalDateTime end = taskEnd();
         if(start.isEqual(LocalDateTime.ofEpochSecond(1, 1, ZoneOffset.UTC).minusYears(999))) {
-            System.out.println("Ошибка: неожиданное время начало задачи");
+            logger.error(UNEXPECTED_START_TIME);
+            System.out.println(UNEXPECTED_START_TIME);
             return Controller.CALENDAR;
         }
         if(end.isBefore(LocalDateTime.now())) {
-            System.out.println("Ошибка: неожиданное время окончания задачи");
+            logger.error(UNEXPECTED_END_TIME);
+            System.out.println(UNEXPECTED_END_TIME);
             return Controller.CALENDAR;
         }
         SortedMap<LocalDateTime, Set<Task>> tasks = Tasks.calendar(abstractTaskList, start, end);
@@ -36,18 +57,36 @@ public class CalendarView implements View, TaskChoose {
             }
             System.out.println(elements.getKey() + "\n");
         }
-        return Controller.MAIN_MENU;
+        return MAIN_MENU;
     }
+
+    /**
+     * Method taskStart - returns the times of Task.
+     *
+     * @return times of this object
+     */
 
     public LocalDateTime taskStart() {
         System.out.println("Укажите дату начала Вашей задачи (Пример: 2021-07-15 14:32)");
         return times();
     }
 
+    /**
+     * Method taskEnd - returns the times of Task.
+     *
+     * @return times of this object
+     */
+
     public LocalDateTime taskEnd() {
         System.out.println("Укажите дату окончания Вашей задачи (Пример: 2021-07-15 14:32)");
         return times();
     }
+
+    /**
+     * Method taskChoose - returns the taskType of Task.
+     *
+     * @return taskType of this object
+     */
 
     @Override
     public int taskChoose() {
@@ -61,19 +100,24 @@ public class CalendarView implements View, TaskChoose {
             String taskName = bufferedReader.readLine();
             taskType = Integer.parseInt(taskName);
         } catch (IOException e) {
-            return Controller.CALENDAR;
+            logger.error(WRONG_NUMBER);
+            System.out.println(WRONG_NUMBER);
+            return taskChoose();
         }
         return taskType;
     }
 
+    /**
+     * Method times - returns the time of Task.
+     *
+     * @return time of this object
+     */
+
     public LocalDateTime times() {
-        String date = "";
+        String date;
         LocalDateTime time;
-        try {
-            date = bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Scanner scanner = new Scanner(System.in);
+        date = scanner.nextLine();
         try {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");
             time = LocalDateTime.parse(date, dateTimeFormatter);

@@ -7,6 +7,14 @@ import java.io.InputStreamReader;
 
 public interface View {
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-    public int printInfo(AbstractTaskList abstractTaskList);
+    int printInfo(AbstractTaskList abstractTaskList);
 
+    /**
+     * Method exception - to display error messages to the user.
+     *
+     * @param message of type String
+     */
+    default void exception(String message) {
+        System.out.println(message);
+    }
 }

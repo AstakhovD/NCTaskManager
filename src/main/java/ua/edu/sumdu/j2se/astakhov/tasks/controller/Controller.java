@@ -5,6 +5,12 @@ import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
 
 import java.io.IOException;
 
+/**
+ * Class Controller displays functionality of application.
+ *
+ * @author Астахов Дмитрій
+ */
+
 public abstract class Controller {
     public static final int MAIN_MENU = 0;
     public static final int TASK_LIST = 1;
@@ -18,6 +24,13 @@ public abstract class Controller {
 
     protected View view;
     protected int actionToDo;
+
+    /**
+     * Constructor Controller
+     *
+     * @param view of type View
+     * @param actionToDo of type int
+     */
 
     public Controller(View view, int actionToDo) {
         this.view = view;

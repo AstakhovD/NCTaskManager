@@ -1,2 +1,57 @@
 2021-01-05 15:00:59 ERROR NotificationController:83 - Ошибка: Неожиданное время
 2021-01-07 16:22:22 ERROR SaveAndLoadTaskController:48 - Ошибка: Файл не был найден
+2021-01-19 22:28:14 ERROR AddTaskController:57 - Ошибка: Неожиданное время
+2021-01-19 22:28:21 ERROR AddTaskController:57 - Ошибка: Неожиданное время
+2021-01-19 22:28:51 ERROR AddTaskController:57 - Ошибка: Неожиданное время
+2021-01-19 22:49:47 ERROR RemoveTaskController:32 - Ошибка: Вы ввели неверное число
+2021-01-19 22:50:02 ERROR RemoveTaskController:25 - Ошибка: Неожиданный индекс задачи
+2021-01-19 22:51:28 ERROR RemoveTaskController:32 - Ошибка: Вы ввели неверное число
+2021-01-19 22:51:31 ERROR RemoveTaskController:25 - Ошибка: Неожиданный индекс задачи
+2021-01-19 22:52:40 ERROR RemoveTaskController:32 - Ошибка: Вы ввели неверное число
+2021-01-19 22:52:41 ERROR RemoveTaskController:32 - Ошибка: Вы ввели неверное число
+2021-01-19 22:52:43 ERROR RemoveTaskController:25 - Ошибка: Неожиданный индекс задачи
+2021-01-19 22:57:05 ERROR RemoveTaskController:34 - Ошибка: Вы ввели неверное число
+2021-01-19 22:57:15 ERROR RemoveTaskController:26 - Ошибка: Неожиданный индекс задачи
+2021-01-19 23:07:24 ERROR AddTaskController:68 - Ошибка: Вы ввели неверное число
+2021-01-19 23:12:22 ERROR RemoveTaskController:32 - Ошибка: Вы ввели неверное число
+2021-01-19 23:12:26 ERROR RemoveTaskController:25 - Ошибка: Неожиданный индекс задачи
+2021-01-19 23:23:09 ERROR RemoveTaskController:32 - Ошибка: Вы ввели неверное число
+2021-01-19 23:26:24 ERROR RemoveTaskController:34 - Ошибка: Вы ввели неверное число
+2021-01-19 23:26:24 ERROR RemoveTaskController:34 - Ошибка: Вы ввели неверное число
+2021-01-19 23:26:26 ERROR RemoveTaskController:34 - Ошибка: Вы ввели неверное число
+2021-01-19 23:36:23 ERROR AddTaskController:67 - Ошибка: Вы ввели неверное число
+2021-01-19 23:37:07 ERROR RemoveTaskController:35 - Ошибка: Вы ввели неверное число
+2021-01-19 23:37:09 ERROR RemoveTaskController:27 - Ошибка: Неожиданный индекс задачи
+2021-01-19 23:37:11 ERROR RemoveTaskController:35 - Ошибка: Вы ввели неверное число
+2021-01-20 00:46:57 ERROR CalendarView:30 - Ошибка: Неожиданное время начала задачи
+2021-01-20 01:10:00 ERROR CalendarView:30 - Ошибка: Неожиданное время начала задачи
+2021-01-20 10:07:57 ERROR AddTaskView:98 - Ошибка: Неожиданное время
+2021-01-20 13:54:30 ERROR RemoveTaskView:21 - Ошибка: Неожиданный индекс задачи
+2021-01-20 13:57:20 ERROR RemoveTaskView:21 - Ошибка: Неожиданный индекс задачи
+2021-01-20 13:57:30 ERROR RemoveTaskView:21 - Ошибка: Неожиданный индекс задачи
+2021-01-20 15:07:13 ERROR RemoveTaskController:26 - Ошибка: Неожиданный индекс задачи
+2021-01-20 15:11:56 ERROR AddTaskView:33 - Ошибка: Неожиданное название задачи
+2021-01-20 15:15:11 ERROR RemoveTaskController:26 - Ошибка: Неожиданный индекс задачи
+2021-01-20 15:20:37 ERROR InfoTaskController:52 - Ошибка: Вы ввели неверное число
+2021-01-20 15:20:41 ERROR InfoTaskController:28 - Ошибка: Неожиданный индекс задачи
+2021-01-20 15:21:04 ERROR CalendarController:26 - Ошибка: Вы ввели неверное число
+2021-01-20 15:21:29 ERROR CalendarController:26 - Ошибка: Вы ввели неверное число
+2021-01-20 15:22:23 ERROR InfoTaskController:52 - Ошибка: Вы ввели неверное число
+2021-01-20 15:23:15 ERROR ChangeTaskController:87 - Ошибка: Вы ввели неверное число
+2021-01-20 15:25:37 ERROR ChangeTaskController:26 - Ошибка: Неожиданный индекс задачи
+2021-01-20 15:54:06 ERROR AddTaskView:33 - Ошибка: Неожиданное название задачи
+2021-01-20 15:54:38 ERROR AddTaskController:66 - Ошибка: Вы ввели неверное число
+2021-01-20 15:55:25 ERROR RemoveTaskController:26 - Ошибка: Неожиданный индекс задачи
+2021-01-20 15:56:28 ERROR SaveAndLoadTaskController:50 - Ошибка: Файл не был найден
+2021-01-20 15:57:19 ERROR SaveAndLoadTaskController:51 - Ошибка: Вы ввели неверное число
+2021-01-20 15:57:37 ERROR CalendarController:26 - Ошибка: Вы ввели неверное число
+2021-01-20 15:58:12 ERROR InfoTaskController:52 - Ошибка: Вы ввели неверное число
+2021-01-20 15:58:21 ERROR InfoTaskController:28 - Ошибка: Неожиданный индекс задачи
+2021-01-20 15:58:40 ERROR ChangeTaskController:87 - Ошибка: Вы ввели неверное число
+2021-01-20 20:09:29 ERROR AddTaskView:52 - Ошибка: Неожиданное название задачи
+2021-01-20 20:09:54 ERROR AddTaskController:56 - Ошибка: Неожиданное время начала задачи
+2021-01-20 20:11:01 ERROR AddTaskController:86 - Ошибка: Вы ввели неверное число
+2021-01-20 20:11:06 ERROR RemoveTaskController:56 - Ошибка: Вы ввели неверное число
+2021-01-20 20:11:11 ERROR RemoveTaskController:46 - Ошибка: Неожиданный индекс задачи
+2021-01-20 20:11:40 ERROR CalendarView:44 - Ошибка: Неожиданное время начала задачи
+2021-01-20 20:13:08 ERROR ChangeTaskController:108 - Ошибка: Вы ввели неверное число

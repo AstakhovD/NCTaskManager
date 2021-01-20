@@ -1,6 +1,6 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.view;
 
-import ua.edu.sumdu.j2se.astakhov.tasks.controller.Controller;
+import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 
 import java.io.IOException;
@@ -8,8 +8,26 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Controller.CHANGE_TASK;
+import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.*;
+
+/**
+ * Class ChangeTaskView realizes changes parameters for Tasks.
+ *
+ * @author Астахов Дмитрій
+ */
 
 public class ChangeTaskView implements View, TaskChoose {
+
+    private static final Logger logger = Logger.getLogger(ChangeTaskView.class);
+
+    /**
+     * Method taskChoose - returns the taskType of Task.
+     *
+     * @return taskType of this object
+     */
 
     @Override
     public int taskChoose() {
@@ -20,15 +38,31 @@ public class ChangeTaskView implements View, TaskChoose {
             String taskName = bufferedReader.readLine();
             taskType = Integer.parseInt(taskName);
         } catch (IOException e) {
-            return -1;
+            logger.error(WRONG_NUMBER);
+            System.out.println(WRONG_NUMBER);
+            return taskChoose();
         }
         return taskType;
     }
 
+    /**
+     * Method printInfo shows result.
+     *
+     * @param abstractTaskList of type AbstractTaskList
+     * @return back to the "CHANGE_TASK" menu
+     */
+
     @Override
     public int printInfo(AbstractTaskList abstractTaskList) {
-        return Controller.CHANGE_TASK;
+        System.out.println("Изменения были применены");
+        return CHANGE_TASK;
     }
+
+    /**
+     * Method taskChooseRepeatable - returns the taskType of Task.
+     *
+     * @return taskType of this object
+     */
 
     public int taskChooseRepeatable() {
         System.out.println("1 - Изменить название задачи");
@@ -40,10 +74,18 @@ public class ChangeTaskView implements View, TaskChoose {
             String taskName = bufferedReader.readLine();
             taskType = Integer.parseInt(taskName);
         } catch (IOException e) {
-            return -1;
+            logger.error(WRONG_NUMBER);
+            System.out.println(WRONG_NUMBER);
+            return taskChooseRepeatable();
         }
         return taskType;
     }
+
+    /**
+     * Method taskChooseNotRepeatable - returns the taskType of Task.
+     *
+     * @return taskType of this object
+     */
 
     public int taskChooseNotRepeatable() {
         System.out.println("1 - Изменить название задачи");
@@ -54,10 +96,18 @@ public class ChangeTaskView implements View, TaskChoose {
             String taskName = bufferedReader.readLine();
             taskType = Integer.parseInt(taskName);
         } catch (IOException e) {
-            return -1;
+            logger.error(WRONG_NUMBER);
+            System.out.println(WRONG_NUMBER);
+            return taskChooseNotRepeatable();
         }
         return taskType;
     }
+
+    /**
+     * Method interval - returns the interval multiplied by 60 of Task.
+     *
+     * @return interval multiplied by 60 of this object
+     */
 
     public int interval() {
         System.out.println("Укажите новый интервал выполнение задачи: ");
@@ -68,8 +118,14 @@ public class ChangeTaskView implements View, TaskChoose {
         } catch (IOException e) {
             return Integer.MAX_VALUE;
         }
-        return interval;
+        return interval * 60;
     }
+
+    /**
+     * Method index - returns the index of Task.
+     *
+     * @return index of this object
+     */
 
     public int index() {
         System.out.println("Укажите номер задачи которую нужно изменить: ");
@@ -83,31 +139,63 @@ public class ChangeTaskView implements View, TaskChoose {
         return index;
     }
 
+    /**
+     * Method time - returns the times of Task.
+     *
+     * @return times of this object
+     */
+
     public LocalDateTime time() {
         System.out.println("Введите дату (Пример: 2021-07-15 14:32)");
         return times();
     }
+
+    /**
+     * Method start - returns the times of Task.
+     *
+     * @return times of this object
+     */
 
     public LocalDateTime start() {
         System.out.println("Введите дату начала Вашей задачи (Пример: 2021-07-15 14:32)");
         return times();
     }
 
+    /**
+     * Method end - returns the times of Task.
+     *
+     * @return times of this object
+     */
+
     public LocalDateTime end() {
         System.out.println("Введите дату окончания Вашей задачи (Пример: 2021-07-15 14:32)");
         return times();
     }
 
+    /**
+     * Method newTitle - returns the new name of Task.
+     *
+     * @return name of this object
+     */
+
     public String newTitle() {
         System.out.println("Введите новое название Вашей задачи");
-        String date = " ";
-        try {
-            date = bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String name;
+        Scanner scanner = new Scanner(System.in);
+        name = scanner.nextLine();
+        if(name.isEmpty()) {
+            logger.error(UNEXPECTED_TITLE);
+            System.out.println(UNEXPECTED_TITLE);
+            return newTitle();
         }
-        return date;
+        return name;
     }
+
+    /**
+     * Method times - returns the time of Task.
+     *
+     * @return time of this object
+     */
 
     public LocalDateTime times() {
         String date = "";
@@ -115,7 +203,9 @@ public class ChangeTaskView implements View, TaskChoose {
         try {
             date = bufferedReader.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(UNEXPECTED_TIME);
+            System.out.println(UNEXPECTED_TIME);
+            return times();
         }
         try {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm");

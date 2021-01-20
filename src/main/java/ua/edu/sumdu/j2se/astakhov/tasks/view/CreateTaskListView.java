@@ -1,9 +1,24 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.view;
 
-import ua.edu.sumdu.j2se.astakhov.tasks.controller.Controller;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 
+import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Controller.MAIN_MENU;
+
+/**
+ * Class CreateTaskListView realizes create task list.
+ *
+ * @author Астахов Дмитрій
+ */
+
 public class CreateTaskListView implements View {
+
+    /**
+     * Method printInfo shows the result.
+     *
+     * @param abstractTaskList of type AbstractTaskList
+     * @return back to the "MAIN_MENU" menu
+     */
+
     @Override
     public int printInfo(AbstractTaskList abstractTaskList) {
         System.out.println("Просмотр задач");
@@ -17,6 +32,6 @@ public class CreateTaskListView implements View {
                         ", время - " + abstractTaskList.getTask(i).getTime() + ", активность - " + abstractTaskList.getTask(i).isActive());
             }
         }
-        return Controller.MAIN_MENU;
+        return MAIN_MENU;
     }
 }

@@ -7,13 +7,36 @@ import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
 
 import java.time.LocalDateTime;
 
+import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.UNEXPECTED_INDEX;
+import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.WRONG_NUMBER;
+
+/**
+ * Class InfoTaskController realizes change task activity.
+ *
+ * @author Астахов Дмитрій
+ */
+
 public class InfoTaskController extends Controller {
 
     private static final Logger logger = Logger.getLogger(InfoTaskController.class);
 
+    /**
+     * Constructor InfoTaskController
+     *
+     * @param view of type View
+     * @param actionToDo of type int
+     */
+
     public InfoTaskController(View view, int actionToDo) {
         super(view, actionToDo);
     }
+
+    /**
+     * Method process realizes change task activity.
+     *
+     * @param abstractTaskList of type AbstractTaskList
+     * @return shows the result of your choose
+     */
 
     @Override
     public int process(AbstractTaskList abstractTaskList) {
@@ -22,9 +45,9 @@ public class InfoTaskController extends Controller {
         if(taskChoose == 1) {
             index = ((InfoTaskView) view).index();
             if(index >= abstractTaskList.size() || abstractTaskList.size() - 1 < index) {
-                logger.error("Ошибка: задачи с таким номером не существует");
-                System.out.println("Ошибка: задачи с таким номером не существует");
-                return Controller.ACTIVE_TASK;
+                logger.error(UNEXPECTED_INDEX);
+                view.exception(UNEXPECTED_INDEX);
+                return ACTIVE_TASK;
             } else {
                 int mode = ((InfoTaskView) view).activityMode();
                 if(mode == 1) {
@@ -38,13 +61,17 @@ public class InfoTaskController extends Controller {
                         abstractTaskList.remove(abstractTaskList.getTask(index));
                     }
                 } else {
-                    logger.error("Ошибка: Вы ввели неверное число");
-                    System.out.println("Ошибка: Вы ввели неверное число");
+                    logger.error(WRONG_NUMBER);
+                    view.exception(WRONG_NUMBER);
                     return ACTIVE_TASK;
                 }
             }
         } else if(taskChoose == 2) {
             return MAIN_MENU;
+        } else {
+            logger.error(WRONG_NUMBER);
+            view.exception(WRONG_NUMBER);
+            return ACTIVE_TASK;
         }
         return view.printInfo(abstractTaskList);
     }
