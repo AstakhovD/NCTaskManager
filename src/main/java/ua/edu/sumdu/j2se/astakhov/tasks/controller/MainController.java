@@ -1,6 +1,7 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.controller;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.TaskIO;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.*;
@@ -21,7 +22,7 @@ import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.FILE_NOT_FOUND;
 
 public class MainController extends Controller {
 
-    private static final Logger logger = Logger.getLogger(MainController.class);
+    private static final Logger logger = LogManager.getLogger(MainController.class);
 
     private final AbstractTaskList abstractTaskList;
     private final List<Controller> controllers = new ArrayList<>();

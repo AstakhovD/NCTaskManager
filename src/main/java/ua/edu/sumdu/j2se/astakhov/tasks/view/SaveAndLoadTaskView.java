@@ -1,6 +1,7 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.view;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class SaveAndLoadTaskView implements View, TaskChoose {
 
     int checkYourChoose;
 
-    private static final Logger logger = Logger.getLogger(SaveAndLoadTaskView.class);
+    private static final Logger logger = LogManager.getLogger(SaveAndLoadTaskView.class);
 
     /**
      * Method printInfo shows result.

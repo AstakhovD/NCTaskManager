@@ -1,6 +1,7 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.view;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.WRONG_NUMBER;
 
 public class RemoveTaskView implements View, TaskChoose {
 
-    private static final org.apache.log4j.Logger logger = Logger.getLogger(RemoveTaskView.class);
+    private static final Logger logger = LogManager.getLogger(RemoveTaskView.class);
 
     /**
      * Method printInfo shows result.

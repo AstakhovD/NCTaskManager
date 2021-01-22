@@ -1,6 +1,7 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.controller;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.Task;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.Tasks;
@@ -21,7 +22,7 @@ import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.ERROR;
 
 public class NotificationController extends Thread {
 
-    private static final Logger logger = Logger.getLogger(NotificationController.class);
+    private static final Logger logger = LogManager.getLogger(NotificationController.class);
     NotificationView view;
     private final AbstractTaskList abstractTaskList;
 

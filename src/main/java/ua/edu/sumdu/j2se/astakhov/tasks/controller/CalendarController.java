@@ -1,6 +1,7 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.controller;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.CalendarView;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
@@ -15,7 +16,7 @@ import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.WRONG_NUMBER;
 
 public class CalendarController extends Controller {
 
-    private static final Logger logger = Logger.getLogger(CalendarController.class);
+    private static final Logger logger = LogManager.getLogger(CalendarController.class);
 
     /**
      * Constructor CalendarController.

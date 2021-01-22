@@ -1,6 +1,7 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.view;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import java.io.IOException;
 
@@ -14,7 +15,7 @@ import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.WRONG_NUMBER;
 
 public class MainView implements View {
 
-    private static final Logger logger = Logger.getLogger(MainView.class);
+    private static final Logger logger = LogManager.getLogger(MainView.class);
 
     /**
      * Method printInfo displays functionality of application.

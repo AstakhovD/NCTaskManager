@@ -1,12 +1,14 @@
 package ua.edu.sumdu.j2se.astakhov.tasks.controller;
 
 
-import org.apache.log4j.Logger;
+
 import ua.edu.sumdu.j2se.astakhov.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.Task;
 import ua.edu.sumdu.j2se.astakhov.tasks.model.TaskIO;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.AddTaskView;
 import ua.edu.sumdu.j2se.astakhov.tasks.view.View;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,7 +25,7 @@ import static ua.edu.sumdu.j2se.astakhov.tasks.controller.Errors.*;
 
 public class AddTaskController extends Controller {
 
-    private static final Logger logger = Logger.getLogger(AddTaskController.class);
+    private static final Logger logger = LogManager.getLogger(AddTaskController.class);
 
     /**
      * Constructor AddTaskController
